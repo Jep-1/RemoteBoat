@@ -21,23 +21,19 @@ void setup() {
 }
 
 void loop() {
+  WiFiClient client = server.available();
   int up, heading;
   up=analogRead(JoyStick_Y);
   heading=analogRead(JoyStick_X);
-  WiFiClient client = server.available();
-  
-  //Serial.print(up);
-  //Serial.print(", ");
-  //Serial.println(heading);
 
-  if (client) { // If a new client connects,
-    Serial.println("New Client."); // print a message out in the serial port
-    while (client.connected()) { // loop while the client's connected
-      // Wait for the client to send data
-      if (client.available()) {
-
-      }
+  if (client){
+    Serial.println("New Client.");          
+    while (client.connected()) {
+      client.println("Hello Client!");
+      delay(1000);  // Delay to avoid flooding the client with messages
     }
+    client.stop();
+    Serial.println("Client Disconnected.");
   }
 
   delay(5000);

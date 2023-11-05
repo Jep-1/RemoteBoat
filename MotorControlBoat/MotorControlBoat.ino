@@ -1,5 +1,6 @@
 #include <ESP32Servo.h>
 #include <WiFi.h>
+#include <WiFiClient.h>
 
 Servo myServo;
 int JoyStick_X = 27; //x
@@ -31,8 +32,18 @@ const char *password = "LigmaLigma";
 void loop() 
 {
   int up, heading;
-  up =
-  heading = 
+  WiFiClient client;
+
+  if (client.connect("192.168.4.1", 80)) {
+    while(client.available()){
+      String line = client.readStringUntil('\r');
+      Serial.print("Received: ");
+      Serial.println(line);
+    }
+    client.stop();
+  }
+  delay(1000);
+
   if(up == 4095){
     digitalWrite(motorPin, HIGH);
   }
