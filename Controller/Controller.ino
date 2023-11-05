@@ -3,8 +3,8 @@
 
 // REPLACE WITH YOUR RECEIVER MAC Address
 uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}; //48:E7:29:AF:6F:64 Is the mac but I don't need it?
-int JoyStick_X = 34; //Pin 4
-int JoyStick_Y = 35; //Pin 2
+int JoyStick_X = 34; 
+int JoyStick_Y = 35;
 
 // Structure example to send data
 // Must match the receiver structure
@@ -62,7 +62,7 @@ void loop() {
   yValue = analogRead(JoyStick_Y);
 
   myData.a = xValue;
-  myData.b = 6;
+  myData.b = yValue;
 
   Serial.print(myData.a);
   Serial.print(", ");
@@ -77,5 +77,5 @@ void loop() {
   else {
     Serial.println("Error sending the data");
   }
-  delay(2000);
+  //delay(2000);
 }
